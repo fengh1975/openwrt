@@ -11,5 +11,11 @@
 #
 # 修改默认LAN IP为192.168.8.1
 sed -i 's/192.168.1.1/192.168.8.1/g' package/base-files/files/bin/config_generate
-# 设置LuCI网页默认简体中文 24.10 snapshot正确路径
-sed -i 's/option lang auto/option lang zh_cn/g' feeds/luci/modules/luci-base/ucitemplate/config/luci
+
+# uci-defaults 开机强制设置LuCI简体中文，全版本通用
+cat > package/base-files/files/etc/uci-defaults/99-set-luci-lang <<EOF
+#!/bin/sh
+uci set luci.main.lang=zh_cn
+uci commit luci
+EOF
+chmod +x package/base-files/files/etc/uci-defaults/99-set-luci-lang
