@@ -9,10 +9,14 @@
 # This is free software, licensed under the MIT License.
 # See /LICENSE for more information.
 #
-
 # Uncomment a feed source
 #sed -i 's/^#\(.*helloworld\)/\1/' feeds.conf.default
 
 # Add a feed source
-echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
+#echo 'src-git helloworld https://github.com/fw876/helloworld' >>feeds.conf.default
 #echo 'src-git passwall https://github.com/xiaorouji/openwrt-passwall' >>feeds.conf.default
+
+# 节点小宝软件源
+echo 'src-git owjdxb https://github.com/ionewu/openwrt-app-owjdxb.git' >> feeds.conf.default
+./scripts/feeds update owjdxb
+./scripts/feeds install -a
