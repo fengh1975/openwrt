@@ -10,11 +10,14 @@
 # See /LICENSE for more information.
 #
 
-# Modify default IP
+# 修改默认LAN IP为192.168.8.1
 sed -i 's/192.168.1.1/192.168.8.1/g' package/base-files/files/bin/config_generate
 
-# Modify default theme
-#sed -i 's/luci-theme-bootstrap/luci-theme-argon/g' feeds/luci/collections/luci/Makefile
-# Modify hostname
-#sed -i 's/OpenWrt/P3TERX-Router/g' package/base-files/files/bin/config_generate
+# 设置LuCI网页默认简体中文（刷完直接中文界面）
 sed -i 's/option lang auto/option lang zh_cn/g' feeds/luci/modules/luci-base/root/etc/config/luci
+
+# 添加节点小宝软件源
+echo 'src-git owjdxb https://github.com/ionewu/openwrt-app-owjdxb.git' >> feeds.conf.default
+./scripts/feeds update owjdxb
+./scripts/feeds install -a
+
